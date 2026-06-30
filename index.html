@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Etika Bermedia Sosial | Informatika Kelas 7 SMP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f0f4ff 0%, #d9e6ff 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(15px);
+      border-radius: 30px;
+      box-shadow: 0 25px 50px rgba(0, 20, 60, 0.2);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(120deg, #1e3c72, #2a5298);
+      color: white;
+      padding: 20px 25px;
+      text-align: center;
+      position: relative;
+    }
+    .header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+    .header p {
+      font-size: 1rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+    .badge-kelas {
+      background: #ffd966;
+      color: #1e3c72;
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    /* Navigation tabs */
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      background: #ffffffdd;
+      border-bottom: 2px solid #e0e7ff;
+      padding: 0 10px;
+      justify-content: center;
+    }
+    .nav-tab {
+      background: transparent;
+      border: none;
+      padding: 15px 18px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #2a3b5c;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+      white-space: nowrap;
+    }
+    .nav-tab i {
+      margin-right: 6px;
+    }
+    .nav-tab:hover {
+      color: #1e3c72;
+    }
+    .nav-tab.active {
+      color: #1e3c72;
+      font-weight: 700;
+    }
+    .nav-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: 80%;
+      height: 4px;
+      background: #2a5298;
+      border-radius: 4px 4px 0 0;
+    }
+
+    /* Main content area */
+    .main-content {
+      padding: 25px 25px 30px;
+      background: #ffffff;
+      min-height: 450px;
+      transition: 0.2s;
+    }
+
+    /* Section panels */
+    .section {
+      display: none;
+      animation: fade 0.3s ease;
+    }
+    .section.active {
+      display: block;
+    }
+    @keyframes fade {
+      from { opacity: 0.3; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      color: #1e3c72;
+      margin-bottom: 15px;
+      font-size: 1.7rem;
+      border-left: 6px solid #ffb703;
+      padding-left: 15px;
+    }
+
+    .card {
+      background: #f8fbff;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 15px 0;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      border: 1px solid #dee7f5;
+    }
+
+    .flex-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .icon-box {
+      background: #eef3ff;
+      border-radius: 16px;
+      padding: 20px;
+      flex: 1 1 200px;
+      text-align: center;
+    }
+    .icon-box span {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .icon-box h4 {
+      color: #1e3c72;
+      margin-bottom: 8px;
+    }
+
+    /* Studi kasus interaktif */
+    .case-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .case-btn {
+      background: #e9efff;
+      border: 2px solid #b8c9f0;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      flex: 1 1 120px;
+      text-align: center;
+    }
+    .case-btn:hover {
+      background: #d4e0ff;
+      border-color: #2a5298;
+    }
+    .case-feedback {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 14px;
+      background: #fff9e6;
+      border-left: 6px solid #ffb703;
+      font-weight: 500;
+    }
+
+    /* Kuis */
+    .quiz-question {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 15px 0 10px;
+    }
+    .quiz-option {
+      display: block;
+      background: #f2f6ff;
+      margin: 8px 0;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .quiz-option:hover {
+      background: #e0ebff;
+      border-color: #2a5298;
+    }
+    .quiz-option.selected {
+      background: #cbdaff;
+      border-color: #1e3c72;
+    }
+    .btn-primary {
+      background: #1e3c72;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      background: #2a5298;
+    }
+    .score-display {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+
+    /* Footer */
+    .footer {
+      background: #f2f5fc;
+      padding: 15px 25px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #3a4a66;
+      border-top: 1px solid #dce3f2;
+    }
+
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 1.5rem;
+      }
+      .nav-tab {
+        padding: 12px 10px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📱 Etika Bermedia Sosial</h1>
+    <p>Informatika · Kelas 7 SMP</p>
+    <span class="badge-kelas">Kurikulum Merdeka</span>
+  </div>
+
+  <!-- Navigasi interaktif -->
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-section="materi"><i>📘</i> Materi</button>
+    <button class="nav-tab" data-section="studi-kasus"><i>🔍</i> Studi Kasus</button>
+    <button class="nav-tab" data-section="kuis"><i>🧠</i> Kuis</button>
+    <button class="nav-tab" data-section="rangkuman"><i>📌</i> Rangkuman</button>
+  </div>
+
+  <div class="main-content">
+    <!-- Bagian Materi -->
+    <div id="materi" class="section active">
+      <h2>✨ Mengapa Etika Penting?</h2>
+      <div class="card">
+        <p>Media sosial adalah tempat kita berinteraksi dengan banyak orang. <strong>Etika bermedia sosial</strong> adalah aturan atau norma sopan santun saat menggunakan platform digital seperti Instagram, TikTok, WhatsApp, dan lainnya.</p>
+      </div>
+      <div class="flex-row">
+        <div class="icon-box">
+          <span>🔐</span>
+          <h4>Jaga Privasi</h4>
+          <p>Jangan sebarkan data pribadi (alamat, nomor telepon, password) ke publik.</p>
+        </div>
+        <div class="icon-box">
+          <span>💬</span>
+          <h4>Komunikasi Santun</h4>
+          <p>Gunakan bahasa yang baik, hindari kata kasar atau menyakiti perasaan.</p>
+        </div>
+        <div class="icon-box">
+          <span>🧠</span>
+          <h4>Cek Fakta</h4>
+          <p>Jangan mudah menyebarkan berita yang belum jelas kebenarannya (hoaks).</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🌐 Prinsip Dasar</h3>
+        <ul style="margin-left: 20px; line-height: 1.8;">
+          <li><strong>Think before posting:</strong> Pikirkan dampak sebelum mengunggah.</li>
+          <li><strong>Hargai perbedaan pendapat:</strong> Tidak semua orang setuju dengan kita.</li>
+          <li><strong>Jangan cyberbullying:</strong> Perundungan daring melanggar hukum dan menyakiti orang lain.</li>
+          <li><strong>Hormati hak cipta:</strong> Cantumkan sumber jika menggunakan karya orang lain.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bagian Studi Kasus Interaktif -->
+    <div id="studi-kasus" class="section">
+      <h2>🕵️ Studi Kasus: Apa yang Harus Dilakukan?</h2>
+      <div class="card">
+        <p><strong>Kasus:</strong> Budi melihat temannya, Ani, diejek di grup WhatsApp kelas karena fotonya diedit jadi lucu. Banyak yang tertawa. Budi merasa tidak nyaman.</p>
+        <p><em>Apa tindakan yang paling tepat untuk Budi?</em></p>
+        <div class="case-options">
+          <button class="case-btn" data-answer="a">A. Ikut menertawakan agar dianggap keren</button>
+          <button class="case-btn" data-answer="b">B. Diam saja, bukan urusannya</button>
+          <button class="case-btn" data-answer="c">C. Menghubungi Ani secara pribadi, memberi dukungan, dan melaporkan ke wali kelas</button>
+          <button class="case-btn" data-answer="d">D. Membalas dengan ejekan yang lebih keras</button>
+        </div>
+        <div id="caseFeedback" class="case-feedback" style="display: none;"></div>
+      </div>
+    </div>
+
+    <!-- Bagian Kuis Interaktif -->
+    <div id="kuis" class="section">
+      <h2>🧪 Uji Pemahamanmu</h2>
+      <div class="card" id="quizContainer">
+        <div class="quiz-question" id="questionText">Memuat pertanyaan...</div>
+        <div id="optionsContainer"></div>
+        <button class="btn-primary" id="submitQuiz">Periksa Jawaban</button>
+        <button class="btn-primary" id="nextQuestion" style="display: none; background: #4a6fa5;">Soal Berikutnya ➡️</button>
+        <div id="quizFeedback" style="margin-top: 12px; font-weight: 500;"></div>
+        <div class="score-display" id="scoreDisplay" style="display: none;">Skor: 0 / 5</div>
+      </div>
+    </div>
+
+    <!-- Bagian Rangkuman -->
+    <div id="rangkuman" class="section">
+      <h2>📋 Rangkuman Etika Bermedia Sosial</h2>
+      <div class="card">
+        <ul style="list-style-type: none; padding-left: 0;">
+          <li style="margin-bottom: 12px;">✅ <strong>Gunakan bahasa sopan</strong> – seperti berbicara langsung.</li>
+          <li style="margin-bottom: 12px;">✅ <strong>Lindungi privasi</strong> – tidak semua informasi boleh dibagikan.</li>
+          <li style="margin-bottom: 12px;">✅ <strong>Verifikasi informasi</strong> – cek kebenaran sebelum share.</li>
+          <li style="margin-bottom: 12px;">✅ <strong>Tolak cyberbullying</strong> – laporkan dan dukung korban.</li>
+          <li style="margin-bottom: 12px;">✅ <strong>Hargai karya orang lain</strong> – jangan plagiat.</li>
+        </ul>
+        <p style="margin-top: 15px;"><strong>Ingat:</strong> Jejak digital sulit dihapus. Jadilah pengguna media sosial yang cerdas dan bertanggung jawab! 🌟</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    🏫 Media Pembelajaran Interaktif · Informatika SMP · © 2026
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ---------- Navigasi Tab ----------
+    const tabs = document.querySelectorAll('.nav-tab');
+    const sections = document.querySelectorAll('.section');
+
+    function switchSection(sectionId) {
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      const activeTab = Array.from(tabs).find(tab => tab.dataset.section === sectionId);
+      if (activeTab) activeTab.classList.add('active');
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function(e) {
+        const sectionId = this.dataset.section;
+        switchSection(sectionId);
+      });
+    });
+
+    // ---------- Studi Kasus Interaktif ----------
+    const caseButtons = document.querySelectorAll('.case-btn');
+    const caseFeedbackDiv = document.getElementById('caseFeedback');
+
+    caseButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const answer = this.dataset.answer;
+        // Hapus seleksi sebelumnya
+        caseButtons.forEach(b => b.style.background = '#e9efff');
+        this.style.background = '#d4e0ff';
+        
+        let feedbackText = '';
+        if (answer === 'c') {
+          feedbackText = '🌟 Benar! Budi menunjukkan empati dan bertindak tepat: mendukung Ani dan melaporkan ke pihak yang berwenang. Itu bagian dari etika digital.';
+          caseFeedbackDiv.style.background = '#e6ffed';
+          caseFeedbackDiv.style.borderLeftColor = '#2e7d32';
+        } else if (answer === 'a') {
+          feedbackText = '❌ Tidak tepat. Ikut menertawakan hanya akan memperburuk perundungan dan melukai perasaan Ani.';
+          caseFeedbackDiv.style.background = '#ffebee';
+          caseFeedbackDiv.style.borderLeftColor = '#c62828';
+        } else if (answer === 'b') {
+          feedbackText = '⚠️ Kurang tepat. Diam saja membiarkan cyberbullying terjadi. Sebaiknya beri dukungan atau laporkan.';
+          caseFeedbackDiv.style.background = '#fff3e0';
+          caseFeedbackDiv.style.borderLeftColor = '#ef6c00';
+        } else if (answer === 'd') {
+          feedbackText = '🚫 Sangat tidak tepat. Membalas dengan ejekan hanya akan memperkeruh suasana dan melanggar etika.';
+          caseFeedbackDiv.style.background = '#ffebee';
+          caseFeedbackDiv.style.borderLeftColor = '#c62828';
+        }
+        caseFeedbackDiv.textContent = feedbackText;
+        caseFeedbackDiv.style.display = 'block';
+      });
+    });
+
+    // ---------- Kuis Interaktif ----------
+    const quizData = [
+      {
+        question: "1. Apa yang harus kamu lakukan sebelum membagikan informasi di media sosial?",
+        options: ["Langsung share agar cepat viral", "Cek kebenaran dan sumber informasinya", "Membagikan jika berasal dari teman dekat", "Tidak perlu dipikirkan"],
+        correct: 1
+      },
+      {
+        question: "2. Contoh tindakan cyberbullying adalah...",
+        options: ["Memberi semangat di kolom komentar", "Mengirim pesan ejekan berulang kali kepada seseorang", "Membagikan poster kegiatan positif", "Meminta izin sebelum mengunggah foto teman"],
+        correct: 1
+      },
+      {
+        question: "3. Etika dalam berkomunikasi di grup WhatsApp antara lain...",
+        options: ["Menggunakan kata-kata kasar agar terlihat tegas", "Mengirim pesan pada jam 2 pagi karena penting", "Menghargai pendapat orang lain dan tidak spam", "Membagikan nomor telepon orang tanpa izin"],
+        correct: 2
+      },
+      {
+        question: "4. Jika kamu mendapatkan berita yang mencurigakan, sikapmu adalah...",
+        options: ["Langsung percaya dan menyebarkan", "Diamkan saja", "Mencari informasi dari sumber terpercaya sebelum bertindak", "Menganggap semua berita benar"],
+        correct: 2
+      },
+      {
+        question: "5. Mengapa kita tidak boleh sembarangan membagikan data pribadi di media sosial?",
+        options: ["Karena tidak menarik", "Agar tidak disalahgunakan oleh pihak tak bertanggung jawab", "Supaya terlihat misterius", "Karena dilarang keras walaupun tidak apa-apa"],
+        correct: 1
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let userScore = 0;
+    let selectedOptionIndex = null;
+    let quizSubmitted = false;
+
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const submitBtn = document.getElementById('submitQuiz');
+    const nextBtn = document.getElementById('nextQuestion');
+    const quizFeedback = document.getElementById('quizFeedback');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+
+    function loadQuestion(index) {
+      const q = quizData[index];
+      questionText.textContent = q.question;
+      optionsContainer.innerHTML = '';
+      q.options.forEach((opt, idx) => {
+        const optDiv = document.createElement('div');
+        optDiv.className = 'quiz-option';
+        optDiv.textContent = opt;
+        optDiv.dataset.optionIndex = idx;
+        optDiv.addEventListener('click', function() {
+          if (quizSubmitted) return; // sudah terkunci
+          // Hapus selected dari semua
+          document.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('selected'));
+          this.classList.add('selected');
+          selectedOptionIndex = idx;
+        });
+        optionsContainer.appendChild(optDiv);
+      });
+      // Reset state
+      selectedOptionIndex = null;
+      quizSubmitted = false;
+      quizFeedback.textContent = '';
+      submitBtn.style.display = 'inline-block';
+      nextBtn.style.display = 'none';
+      // Sembunyikan skor saat mengerjakan
+      scoreDisplay.style.display = (index === 0 && userScore === 0) ? 'none' : scoreDisplay.style.display;
+    }
+
+    function checkAnswer() {
+      if (selectedOptionIndex === null) {
+        quizFeedback.textContent = '⚠️ Pilih salah satu jawaban terlebih dahulu.';
+        return;
+      }
+      const correctIndex = quizData[currentQuestionIndex].correct;
+      const isCorrect = (selectedOptionIndex === correctIndex);
+      if (isCorrect) {
+        userScore++;
+        quizFeedback.textContent = '✅ Jawaban kamu benar!';
+        quizFeedback.style.color = '#2e7d32';
+      } else {
+        quizFeedback.textContent = `❌ Kurang tepat. Jawaban yang benar adalah: "${quizData[currentQuestionIndex].options[correctIndex]}"`;
+        quizFeedback.style.color = '#c62828';
+      }
+      // Kunci pilihan
+      quizSubmitted = true;
+      submitBtn.style.display = 'none';
+      nextBtn.style.display = 'inline-block';
+      // Tampilkan skor sementara
+      scoreDisplay.textContent = `Skor sementara: ${userScore} / ${currentQuestionIndex + 1}`;
+      scoreDisplay.style.display = 'block';
+      // Tandai jawaban benar secara visual (opsional)
+      const allOptions = document.querySelectorAll('.quiz-option');
+      allOptions.forEach((opt, idx) => {
+        opt.style.pointerEvents = 'none';
+        if (idx === correctIndex) {
+          opt.style.background = '#d4edda';
+          opt.style.borderColor = '#2e7d32';
+        }
+        if (idx === selectedOptionIndex && !isCorrect) {
+          opt.style.background = '#f8d7da';
+          opt.style.borderColor = '#c62828';
+        }
+      });
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < quizData.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion(currentQuestionIndex);
+        // Kembalikan style pointer
+        document.querySelectorAll('.quiz-option').forEach(opt => opt.style.pointerEvents = 'auto');
+      } else {
+        // Kuis selesai
+        questionText.textContent = "🏁 Kuis selesai!";
+        optionsContainer.innerHTML = '';
+        quizFeedback.textContent = '';
+        submitBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        scoreDisplay.textContent = `🎉 Nilai Akhir: ${userScore} / ${quizData.length}`;
+        scoreDisplay.style.display = 'block';
+        // Tambahkan pesan motivasi
+        const motivasi = document.createElement('p');
+        motivasi.style.marginTop = '10px';
+        if (userScore === quizData.length) {
+          motivasi.textContent = 'Sempurna! Kamu paham etika bermedia sosial dengan sangat baik.';
+        } else if (userScore >= 3) {
+          motivasi.textContent = 'Bagus! Terus tingkatkan pemahamanmu tentang etika digital.';
+        } else {
+          motivasi.textContent = 'Yuk pelajari lagi materi etika bermedia sosial agar lebih bijak berinternet.';
+        }
+        document.getElementById('quizContainer').appendChild(motivasi);
+      }
+    }
+
+    submitBtn.addEventListener('click', checkAnswer);
+    nextBtn.addEventListener('click', nextQuestion);
+
+    // Inisialisasi kuis pertama kali
+    loadQuestion(0);
+
+    // Reset saat pindah ke tab kuis (opsional, biar fresh saat diklik)
+    document.querySelector('[data-section="kuis"]').addEventListener('click', function(e) {
+      // Reset kuis hanya jika diinginkan, tapi lebih baik tetap melanjutkan progress.
+      // Namun untuk pengalaman belajar, kita bisa reset jika user mengklik tab kuis lagi?
+      // Kita atur agar tidak reset otomatis, tapi bisa ditambahkan tombol reset nanti.
+      // Biarkan saja seperti adanya.
+    });
+
+    // Agar saat klik tab studi kasus, feedback tetap sesuai dengan yang sudah dipilih.
+    // Tidak ada reset paksa.
+  })();
+</script>
+</body>
+</html>
